@@ -53,7 +53,7 @@ public class DelaunayTriangulationDemo extends JFrame {
 
 	private DelaunayTriangulationDemo () {
 		JFrame f = new JFrame("Delaunay Triangulation Example");
-		f.setSize(1200, 800);
+		f.setSize(1300, 800);
 //		f.setLocation(300, 300);
 		f.setResizable(false);
 		f.setBackground(COLOR_BACKGROUND);

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="delaunay-triangulator:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/delaunay_triangulator_jar</output-path>
+    <root id="archive" name="delaunay-triangulator.jar">
+      <element id="module-output" name="delaunay-triangulator" />
+    </root>
+  </artifact>
+</component>
