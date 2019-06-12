@@ -37,11 +37,11 @@ public class DelaunayTriangulator {
 
 		triangleSoup.add(superTriangle);
 
-		for (int i = 0; i < pointSet.size(); i++) {
-			Triangle2D triangle = triangleSoup.findContainingTriangle(pointSet.get(i));
+		for (Vector2D vector2D : pointSet) {
+			Triangle2D triangle = triangleSoup.findContainingTriangle(vector2D);
 
 			if (triangle == null) {
-				Edge2D edge = triangleSoup.findNearestEdge(pointSet.get(i));
+				Edge2D edge = triangleSoup.findNearestEdge(vector2D);
 
 				Triangle2D first = triangleSoup.findOneTriangleSharing(edge);
 				Triangle2D second = triangleSoup.findNeighbour(first, edge);
@@ -52,20 +52,20 @@ public class DelaunayTriangulator {
 				triangleSoup.remove(first);
 				triangleSoup.remove(second);
 
-				Triangle2D triangle1 = new Triangle2D(edge.a, firstNonEdgeVertex, pointSet.get(i));
-				Triangle2D triangle2 = new Triangle2D(edge.b, firstNonEdgeVertex, pointSet.get(i));
-				Triangle2D triangle3 = new Triangle2D(edge.a, secondNonEdgeVertex, pointSet.get(i));
-				Triangle2D triangle4 = new Triangle2D(edge.b, secondNonEdgeVertex, pointSet.get(i));
+				Triangle2D triangle1 = new Triangle2D(edge.a, firstNonEdgeVertex, vector2D);
+				Triangle2D triangle2 = new Triangle2D(edge.b, firstNonEdgeVertex, vector2D);
+				Triangle2D triangle3 = new Triangle2D(edge.a, secondNonEdgeVertex, vector2D);
+				Triangle2D triangle4 = new Triangle2D(edge.b, secondNonEdgeVertex, vector2D);
 
 				triangleSoup.add(triangle1);
 				triangleSoup.add(triangle2);
 				triangleSoup.add(triangle3);
 				triangleSoup.add(triangle4);
 
-				legalizeEdge(triangle1, new Edge2D(edge.a, firstNonEdgeVertex), pointSet.get(i));
-				legalizeEdge(triangle2, new Edge2D(edge.b, firstNonEdgeVertex), pointSet.get(i));
-				legalizeEdge(triangle3, new Edge2D(edge.a, secondNonEdgeVertex), pointSet.get(i));
-				legalizeEdge(triangle4, new Edge2D(edge.b, secondNonEdgeVertex), pointSet.get(i));
+				legalizeEdge(triangle1, new Edge2D(edge.a, firstNonEdgeVertex), vector2D);
+				legalizeEdge(triangle2, new Edge2D(edge.b, firstNonEdgeVertex), vector2D);
+				legalizeEdge(triangle3, new Edge2D(edge.a, secondNonEdgeVertex), vector2D);
+				legalizeEdge(triangle4, new Edge2D(edge.b, secondNonEdgeVertex), vector2D);
 			} else {
 				Vector2D a = triangle.a;
 				Vector2D b = triangle.b;
@@ -73,17 +73,17 @@ public class DelaunayTriangulator {
 
 				triangleSoup.remove(triangle);
 
-				Triangle2D first = new Triangle2D(a, b, pointSet.get(i));
-				Triangle2D second = new Triangle2D(b, c, pointSet.get(i));
-				Triangle2D third = new Triangle2D(c, a, pointSet.get(i));
+				Triangle2D first = new Triangle2D(a, b, vector2D);
+				Triangle2D second = new Triangle2D(b, c, vector2D);
+				Triangle2D third = new Triangle2D(c, a, vector2D);
 
 				triangleSoup.add(first);
 				triangleSoup.add(second);
 				triangleSoup.add(third);
 
-				legalizeEdge(first, new Edge2D(a, b), pointSet.get(i));
-				legalizeEdge(second, new Edge2D(b, c), pointSet.get(i));
-				legalizeEdge(third, new Edge2D(c, a), pointSet.get(i));
+				legalizeEdge(first, new Edge2D(a, b), vector2D);
+				legalizeEdge(second, new Edge2D(b, c), vector2D);
+				legalizeEdge(third, new Edge2D(c, a), vector2D);
 			}
 		}
 
@@ -114,28 +114,9 @@ public class DelaunayTriangulator {
 		}
 	}
 
-	public boolean flipEdge (Vector2D point, boolean isPlaying) {
+	public boolean flipEdge (Vector2D point) {
 		boolean flipped = false;
 
-//		double maxOfAnyCoordinate = 0.0d;
-//
-//		for (Vector2D vector : getPointSet()) {
-//			maxOfAnyCoordinate = Math.max(Math.max(vector.x, vector.y), maxOfAnyCoordinate);
-//		}
-//
-//		maxOfAnyCoordinate *= 16.0d;
-//
-//		Vector2D p1 = new Vector2D(0.0d, 3.0d * maxOfAnyCoordinate);
-//		Vector2D p2 = new Vector2D(3.0d * maxOfAnyCoordinate, 0.0d);
-//		Vector2D p3 = new Vector2D(-3.0d * maxOfAnyCoordinate, -3.0d * maxOfAnyCoordinate);
-//
-//		Triangle2D superTriangle = new Triangle2D(p1, p2, p3);
-//
-//		triangleSoup.add(superTriangle);
-//
-//		Triangle2D triangle = triangleSoup.findContainingTriangle(point);
-
-//		if (triangle == null) {
 		Edge2D edge = triangleSoup.findNearestEdge(point);
 
 		Triangle2D first = triangleSoup.findOneTriangleSharing(edge);
@@ -154,54 +135,12 @@ public class DelaunayTriangulator {
 
 			triangleSoup.add(triangle2);
 			triangleSoup.add(triangle3);
-
-//                if(isPlaying){
-//                    legalizeEdge(triangle2, new Edge2D(firstNonEdgeVertex, secondNonEdgeVertex), edge.b);
-//                    legalizeEdge(triangle3, new Edge2D(firstNonEdgeVertex, secondNonEdgeVertex), edge.a);
-//                }
 		}
-		/*} else {
-			Vector2D a = triangle.a;
-			Vector2D b = triangle.b;
-			Vector2D c = triangle.c;
-
-			triangleSoup.remove(triangle);
-
-			Triangle2D first = new Triangle2D(a, b, c);
-			Triangle2D second = new Triangle2D(b, c, a);
-			Triangle2D third = new Triangle2D(c, a, b);
-
-			triangleSoup.add(first);
-			triangleSoup.add(second);
-			triangleSoup.add(third);
-
-//			if(isPlaying){
-//				legalizeEdge(first, new Edge2D(a, b), c);
-//				legalizeEdge(second, new Edge2D(b, c), a);
-//				legalizeEdge(third, new Edge2D(c, a), b);
-//			}
-		}*/
-
-//		triangleSoup.removeTrianglesUsing(superTriangle.a);
-//		triangleSoup.removeTrianglesUsing(superTriangle.b);
-//		triangleSoup.removeTrianglesUsing(superTriangle.c);
 
 		return flipped;
 	}
 
-	public void shuffle () {
-		Collections.shuffle(pointSet);
-	}
-
-	public void shuffle (int[] permutation) {
-		List<Vector2D> temp = new ArrayList<Vector2D>();
-		for (int i = 0; i < permutation.length; i++) {
-			temp.add(pointSet.get(permutation[i]));
-		}
-		pointSet = temp;
-	}
-
-	public List<Vector2D> getPointSet () {
+	private List<Vector2D> getPointSet () {
 		return pointSet;
 	}
 

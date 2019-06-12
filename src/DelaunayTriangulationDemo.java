@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import javax.swing.Timer;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import utilities.DelaunayTriangulator;
 import utilities.NotEnoughPointsException;
 import utilities.Triangle2D;
@@ -33,10 +33,8 @@ public class DelaunayTriangulationDemo extends JFrame {
 	private static final Color COLOR_TRIANGLE_EDGES = new Color(5, 234, 234);
 	private static final Color COLOR_TRIANGLE_BORDER = new Color(241, 241, 121);
 	private static final Color COLOR_BACKGROUND = new Color(47, 47, 47);
-	DelaunayTriangulator delaunayTriangulator;
-	DelaunayTriangulator trueTriangulation;
-	List<Vector2D> pointSet = new ArrayList<>();
-	List<Vector2D> delaunayPointSet = new ArrayList<>();
+	private DelaunayTriangulator delaunayTriangulator;
+	private DelaunayTriangulator trueTriangulation;
 	private Timer timer;
 	private long begin;
 	private JPanel panel;
@@ -53,7 +51,7 @@ public class DelaunayTriangulationDemo extends JFrame {
 	private int[] triangleXList;
 	private int[] triangleYList;
 
-	public DelaunayTriangulationDemo () {
+	private DelaunayTriangulationDemo () {
 		JFrame f = new JFrame("Delaunay Triangulation Example");
 		f.setSize(1200, 800);
 //		f.setLocation(300, 300);
@@ -67,7 +65,7 @@ public class DelaunayTriangulationDemo extends JFrame {
 			{
 				addMouseListener(new MouseAdapter() {
 					public void mousePressed (MouseEvent e) {
-						if (delaunayTriangulator.flipEdge(new Vector2D(e.getX(), e.getY()), true)) numOfMoves++;
+						if (delaunayTriangulator.flipEdge(new Vector2D(e.getX(), e.getY()))) numOfMoves++;
 						movesLabel.setText("Moves moved: " + numOfMoves);
 
 						try {
@@ -182,10 +180,10 @@ public class DelaunayTriangulationDemo extends JFrame {
 		finishButton.addActionListener(new ButtonListener());
 	}
 
-	public void init () {
+	private void init () {
 		initialized = true;
-		pointSet = new ArrayList<>();
-		delaunayPointSet = new ArrayList<>();
+		List<Vector2D> pointSet = new ArrayList<>();
+		List<Vector2D> delaunayPointSet = new ArrayList<>();
 		numOfMoves = 0;
 
 		for (int i = 0; i < numOfPoints; i++) {
@@ -200,10 +198,10 @@ public class DelaunayTriangulationDemo extends JFrame {
 			delaunayTriangulator.triangulate();
 			int j = 5 + generator.nextInt(6);
 			for (int i = 0; i < j; i++) {
-				delaunayTriangulator.flipEdge(new Vector2D(generator.nextInt(DIMENSION.height - 100) + 100, generator.nextInt(DIMENSION.height - 100) + 100), false);
+				delaunayTriangulator.flipEdge(new Vector2D(generator.nextInt(DIMENSION.height - 100) + 100, generator.nextInt(DIMENSION.height - 100) + 100));
 			}
 			trueTriangulation.triangulate();
-		} catch (NotEnoughPointsException e1) {
+		} catch (NotEnoughPointsException ignored) {
 
 		}
 
@@ -224,7 +222,7 @@ public class DelaunayTriangulationDemo extends JFrame {
 			init();
 			timer = new Timer(1000, e -> {
 				SimpleDateFormat sdf = new SimpleDateFormat("mm:ss", Locale.UK);
-				timerLabel.setText("Time Elapsed: " + sdf.format((long)((long)System.currentTimeMillis() - begin)));
+				timerLabel.setText("Time Elapsed: " + sdf.format(System.currentTimeMillis() - begin));
 			});
 			timer.start();
 			panel.repaint();

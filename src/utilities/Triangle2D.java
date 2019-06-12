@@ -8,13 +8,13 @@ public class Triangle2D {
 	public Vector2D b;
 	public Vector2D c;
 
-	public Triangle2D (Vector2D a, Vector2D b, Vector2D c) {
+	Triangle2D (Vector2D a, Vector2D b, Vector2D c) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
 	}
 
-	public boolean contains (Vector2D point) {
+	boolean contains (Vector2D point) {
 		double pab = point.sub(a).cross(b.sub(a));
 		double pbc = point.sub(b).cross(c.sub(b));
 
@@ -24,14 +24,11 @@ public class Triangle2D {
 
 		double pca = point.sub(c).cross(a.sub(c));
 
-		if (!hasSameSign(pab, pca)) {
-			return false;
-		}
+		return hasSameSign(pab, pca);
 
-		return true;
 	}
 
-	public boolean isPointInCircumcircle (Vector2D point) {
+	boolean isPointInCircumcircle (Vector2D point) {
 		double a11 = a.x - point.x;
 		double a21 = b.x - point.x;
 		double a31 = c.x - point.x;
@@ -54,7 +51,7 @@ public class Triangle2D {
 		return det < 0.0d;
 	}
 
-	public boolean isOrientedCCW () {
+	private boolean isOrientedCCW () {
 		double a11 = a.x - c.x;
 		double a21 = b.x - c.x;
 
@@ -66,11 +63,11 @@ public class Triangle2D {
 		return det > 0.0d;
 	}
 
-	public boolean isNeighbour (Edge2D edge) {
+	boolean isNeighbour (Edge2D edge) {
 		return (a == edge.a || b == edge.a || c == edge.a) && (a == edge.b || b == edge.b || c == edge.b);
 	}
 
-	public Vector2D getNonEdgeVertex (Edge2D edge) {
+	Vector2D getNonEdgeVertex (Edge2D edge) {
 		if (a != edge.a && a != edge.b) {
 			return a;
 		} else if (b != edge.a && b != edge.b) {
@@ -82,15 +79,12 @@ public class Triangle2D {
 		return null;
 	}
 
-	public boolean hasVertex (Vector2D vertex) {
-		if (a == vertex || b == vertex || c == vertex) {
-			return true;
-		}
+	boolean hasVertex (Vector2D vertex) {
+		return a == vertex || b == vertex || c == vertex;
 
-		return false;
 	}
 
-	public EdgeDistancePack findNearestEdge (Vector2D point) {
+	EdgeDistancePack findNearestEdge (Vector2D point) {
 		EdgeDistancePack[] edges = new EdgeDistancePack[3];
 
 		edges[0] = new EdgeDistancePack(new Edge2D(a, b),

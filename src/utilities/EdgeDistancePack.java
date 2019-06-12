@@ -2,10 +2,10 @@ package utilities;
 
 public class EdgeDistancePack implements Comparable<EdgeDistancePack> {
 
-	public Edge2D edge;
-	public double distance;
+	Edge2D edge;
+	private double distance;
 
-	public EdgeDistancePack (Edge2D edge, double distance) {
+	EdgeDistancePack (Edge2D edge, double distance) {
 		this.edge = edge;
 		this.distance = distance;
 	}
