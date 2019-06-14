@@ -1,6 +1,7 @@
 package utilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -123,21 +124,48 @@ public class DelaunayTriangulator {
 		Triangle2D second = triangleSoup.findNeighbour(first, edge);
 
 		if (second != null) {
-			flipped = true;
-			Vector2D firstNonEdgeVertex = first.getNonEdgeVertex(edge);
-			Vector2D secondNonEdgeVertex = second.getNonEdgeVertex(edge);
+			if (isConvex(Arrays.asList(first.getNonEdgeVertex(edge), edge.b, second.getNonEdgeVertex(edge), edge.a))){
+				flipped = true;
+				Vector2D firstNonEdgeVertex = first.getNonEdgeVertex(edge);
+				Vector2D secondNonEdgeVertex = second.getNonEdgeVertex(edge);
 
-			triangleSoup.remove(first);
-			triangleSoup.remove(second);
+				triangleSoup.remove(first);
+				triangleSoup.remove(second);
 
-			Triangle2D triangle2 = new Triangle2D(firstNonEdgeVertex, secondNonEdgeVertex, edge.b);
-			Triangle2D triangle3 = new Triangle2D(firstNonEdgeVertex, secondNonEdgeVertex, edge.a);
+				Triangle2D triangle2 = new Triangle2D(firstNonEdgeVertex, secondNonEdgeVertex, edge.b);
+				Triangle2D triangle3 = new Triangle2D(firstNonEdgeVertex, secondNonEdgeVertex, edge.a);
 
-			triangleSoup.add(triangle2);
-			triangleSoup.add(triangle3);
+				triangleSoup.add(triangle2);
+				triangleSoup.add(triangle3);
+			}
 		}
 
 		return flipped;
+	}
+
+	public boolean isConvex(List<Vector2D> vertices)
+	{
+		if (vertices.size() < 4)
+			return true;
+
+		boolean sign = false;
+		int n = vertices.size();
+
+		for(int i = 0; i < n; i++)
+		{
+			double dx1 = vertices.get((i + 2) % n).x - vertices.get((i + 1) % n).x;
+			double dy1 = vertices.get((i + 2) % n).y - vertices.get((i + 1) % n).y;
+			double dx2 = vertices.get(i).x - vertices.get((i + 1) % n).x;
+			double dy2 = vertices.get(i).y - vertices.get((i + 1) % n).y;
+			double zcrossproduct = dx1 * dy2 - dy1 * dx2;
+
+			if (i == 0)
+				sign = zcrossproduct > 0;
+			else if (sign != (zcrossproduct > 0))
+				return false;
+		}
+
+		return true;
 	}
 
 	private List<Vector2D> getPointSet () {

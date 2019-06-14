@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4f016007-b56e-400d-850c-409aba6b1b07" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/delaunay_triangulator_jar/delaunay-triangulator.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/delaunay_triangulator_jar/delaunay-triangulator.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/delaunay-triangulator/utilities/DelaunayTriangulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/delaunay-triangulator/utilities/DelaunayTriangulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DelaunayTriangulationDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DelaunayTriangulationDemo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utilities/DelaunayTriangulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilities/DelaunayTriangulator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,8 +23,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DelaunayTriangulationDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="55" column="20" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+            <state relative-caret-position="826">
+              <caret line="238" column="4" selection-start-line="238" selection-start-column="4" selection-end-line="238" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,38 +32,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utilities/DelaunayTriangulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="124" column="12" lean-forward="true" selection-start-line="124" selection-start-column="12" selection-end-line="124" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/TriangleSoup.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="68" column="62" selection-start-line="68" selection-start-column="62" selection-end-line="68" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utilities/Triangle2D.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="96" column="10" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/utilities/EdgeDistancePack.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="205">
+              <caret line="126" column="114" selection-start-line="126" selection-start-column="114" selection-end-line="126" selection-end-column="114" />
+              <folding>
+                <element signature="e#5555#5556#0" expanded="true" />
+                <element signature="e#5640#5641#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,9 +65,11 @@
       <find>d_min</find>
       <find>alignment</find>
       <find>Point</find>
+      <find>_vertices</find>
     </findStrings>
     <replaceStrings>
       <replace />
+      <replace>vertices</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -147,6 +129,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -191,7 +174,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -323,7 +305,7 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1359275" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13859275" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info id="Designer" order="3" />
@@ -334,7 +316,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32967034" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32857144" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.36703297" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" visible="true" weight="0.36703297" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -371,6 +353,26 @@
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>triangle2.isPointInCircumcircle(edge.b)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>triangle3.isPointInCircumcircle(edge.b)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>triangle3.isPointInCircumcircle(edge.a)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>triangle2.isPointInCircumcircle(edge.a)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>Math.sqrt(d_min)</expression-string>
         <language-id>JAVA</language-id>
@@ -413,25 +415,13 @@
     <entry file="file://$PROJECT_DIR$/src/AnotherKdTree/KdTree2.java" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa9748.43178/NearestNeighborList.java" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa9748.39193/KDTree.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/awt/geom/Point2D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3417">
-          <caret line="236" column="14" selection-start-line="236" selection-start-column="14" selection-end-line="236" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/awt/geom/Point2D.java" />
     <entry file="file://$PROJECT_DIR$/src/knn/kd-tree.js" />
     <entry file="file://$PROJECT_DIR$/src/AnotherKdTree/KdTree.java" />
     <entry file="file://$PROJECT_DIR$/src/kdtree/KDTree.java" />
     <entry file="file://$PROJECT_DIR$/src/kdtree/Point.java" />
     <entry file="file://$PROJECT_DIR$/src/knn/index.html" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/JComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15657">
-          <caret line="993" column="16" selection-start-line="993" selection-start-column="16" selection-end-line="993" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/JComponent.java" />
     <entry file="file://$PROJECT_DIR$/src/kdtree/KDNode.java" />
     <entry file="file://$PROJECT_DIR$/src/KDTreeVisualization.java" />
     <entry file="file://$PROJECT_DIR$/src/utilities/Vector2D.java">
@@ -455,23 +445,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/DelaunayTriangulationDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="55" column="20" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utilities/DelaunayTriangulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="124" column="12" lean-forward="true" selection-start-line="124" selection-start-column="12" selection-end-line="124" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utilities/TriangleSoup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
@@ -490,6 +463,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DelaunayTriangulationDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="826">
+          <caret line="238" column="4" selection-start-line="238" selection-start-column="4" selection-end-line="238" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utilities/DelaunayTriangulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="126" column="114" selection-start-line="126" selection-start-column="114" selection-end-line="126" selection-end-column="114" />
+          <folding>
+            <element signature="e#5555#5556#0" expanded="true" />
+            <element signature="e#5640#5641#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
