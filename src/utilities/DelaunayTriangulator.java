@@ -1,8 +1,6 @@
 package utilities;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class DelaunayTriangulator {
@@ -10,21 +8,21 @@ public class DelaunayTriangulator {
 	private List<Vector2D> pointSet;
 	private TriangleSoup triangleSoup;
 
-	public DelaunayTriangulator (List<Vector2D> pointSet) {
+	public DelaunayTriangulator(List<Vector2D> pointSet) {
 		this.pointSet = pointSet;
 		this.triangleSoup = new TriangleSoup();
 	}
 
-	public void triangulate () throws NotEnoughPointsException {
+	public void triangulate() throws NotEnoughPointsException {
 		triangleSoup = new TriangleSoup();
 
-		if (pointSet == null || pointSet.size() < 3) {
+		if(pointSet == null || pointSet.size() < 3){
 			throw new NotEnoughPointsException("Less than three points in point set.");
 		}
 
 		double maxOfAnyCoordinate = 0.0d;
 
-		for (Vector2D vector : getPointSet()) {
+		for(Vector2D vector : getPointSet()){
 			maxOfAnyCoordinate = Math.max(Math.max(vector.x, vector.y), maxOfAnyCoordinate);
 		}
 
@@ -38,10 +36,10 @@ public class DelaunayTriangulator {
 
 		triangleSoup.add(superTriangle);
 
-		for (Vector2D vector2D : pointSet) {
+		for(Vector2D vector2D : pointSet){
 			Triangle2D triangle = triangleSoup.findContainingTriangle(vector2D);
 
-			if (triangle == null) {
+			if(triangle == null){
 				Edge2D edge = triangleSoup.findNearestEdge(vector2D);
 
 				Triangle2D first = triangleSoup.findOneTriangleSharing(edge);
@@ -93,11 +91,11 @@ public class DelaunayTriangulator {
 		triangleSoup.removeTrianglesUsing(superTriangle.c);
 	}
 
-	private void legalizeEdge (Triangle2D triangle, Edge2D edge, Vector2D newVertex) {
+	private void legalizeEdge(Triangle2D triangle, Edge2D edge, Vector2D newVertex) {
 		Triangle2D neighbourTriangle = triangleSoup.findNeighbour(triangle, edge);
 
-		if (neighbourTriangle != null) {
-			if (neighbourTriangle.isPointInCircumcircle(newVertex)) {
+		if(neighbourTriangle != null){
+			if(neighbourTriangle.isPointInCircumcircle(newVertex)){
 				triangleSoup.remove(triangle);
 				triangleSoup.remove(neighbourTriangle);
 
@@ -115,7 +113,7 @@ public class DelaunayTriangulator {
 		}
 	}
 
-	public boolean flipEdge (Vector2D point) {
+	public boolean flipEdge(Vector2D point) {
 		boolean flipped = false;
 
 		Edge2D edge = triangleSoup.findNearestEdge(point);
@@ -123,8 +121,8 @@ public class DelaunayTriangulator {
 		Triangle2D first = triangleSoup.findOneTriangleSharing(edge);
 		Triangle2D second = triangleSoup.findNeighbour(first, edge);
 
-		if (second != null) {
-			if (isConvex(Arrays.asList(first.getNonEdgeVertex(edge), edge.b, second.getNonEdgeVertex(edge), edge.a))){
+		if(second != null){
+			if(isConvex(Arrays.asList(first.getNonEdgeVertex(edge), edge.b, second.getNonEdgeVertex(edge), edge.a))){
 				flipped = true;
 				Vector2D firstNonEdgeVertex = first.getNonEdgeVertex(edge);
 				Vector2D secondNonEdgeVertex = second.getNonEdgeVertex(edge);
@@ -143,36 +141,47 @@ public class DelaunayTriangulator {
 		return flipped;
 	}
 
-	public boolean isConvex(List<Vector2D> vertices)
-	{
-		if (vertices.size() < 4)
-			return true;
+	public boolean winCheck(List<Triangle2D> triangleSoup, List<Triangle2D> trueTriangleSoup) {
+		boolean found = false;
+		for(Triangle2D triangle : triangleSoup){
+			found = false;
+			for (Triangle2D trueTriangle : trueTriangleSoup) {
+				if (triangle.containsPoint(trueTriangle.a) && triangle.containsPoint(trueTriangle.b) && triangle.containsPoint(trueTriangle.c)) {
+					found = true;
+				}
+			}
+			if(found == false) {
+				break;
+			}
+		}
+		return found;
+	}
+
+	public boolean isConvex(List<Vector2D> vertices) {
+		if(vertices.size() < 4) return true;
 
 		boolean sign = false;
 		int n = vertices.size();
 
-		for(int i = 0; i < n; i++)
-		{
+		for(int i = 0; i < n; i++){
 			double dx1 = vertices.get((i + 2) % n).x - vertices.get((i + 1) % n).x;
 			double dy1 = vertices.get((i + 2) % n).y - vertices.get((i + 1) % n).y;
 			double dx2 = vertices.get(i).x - vertices.get((i + 1) % n).x;
 			double dy2 = vertices.get(i).y - vertices.get((i + 1) % n).y;
 			double zcrossproduct = dx1 * dy2 - dy1 * dx2;
 
-			if (i == 0)
-				sign = zcrossproduct > 0;
-			else if (sign != (zcrossproduct > 0))
-				return false;
+			if(i == 0) sign = zcrossproduct > 0;
+			else if(sign != (zcrossproduct > 0)) return false;
 		}
 
 		return true;
 	}
 
-	private List<Vector2D> getPointSet () {
+	private List<Vector2D> getPointSet() {
 		return pointSet;
 	}
 
-	public List<Triangle2D> getTriangles () {
+	public List<Triangle2D> getTriangles() {
 		return triangleSoup.getTriangles();
 	}
 

@@ -44,6 +44,7 @@ public class DelaunayTriangulationDemo extends JFrame {
 	private int numOfMoves = 0;
 	private int numOfPoints = 25;
 	private boolean initialized = false;
+	private boolean won = false;
 	private Random generator = new Random();
 
 	private BasicStroke stroke = new BasicStroke(3);
@@ -65,15 +66,21 @@ public class DelaunayTriangulationDemo extends JFrame {
 			{
 				addMouseListener(new MouseAdapter() {
 					public void mousePressed (MouseEvent e) {
-						if (delaunayTriangulator.flipEdge(new Vector2D(e.getX(), e.getY()))) numOfMoves++;
-						movesLabel.setText("Moves moved: " + numOfMoves);
+						if (!won) {
+							if (delaunayTriangulator.flipEdge(new Vector2D(e.getX(), e.getY()))) numOfMoves++;
+							movesLabel.setText("Moves moved: " + numOfMoves);
 
-						try {
-							trueTriangulation.triangulate();
-						} catch (NotEnoughPointsException ignored) {
+							won = delaunayTriangulator.winCheck(delaunayTriangulator.getTriangles(), trueTriangulation.getTriangles());
+
+							if(won) {
+								movesLabel.setText("Moves moved: " + numOfMoves + " YOU WON " + timerLabel.getText());
+								timer.stop();
+							}
+
+							repaint();
+						} else {
+							System.out.println("WON");
 						}
-
-						repaint();
 					}
 
 					public void mouseReleased (MouseEvent e) {
@@ -182,6 +189,7 @@ public class DelaunayTriangulationDemo extends JFrame {
 
 	private void init () {
 		initialized = true;
+		won = false;
 		List<Vector2D> pointSet = new ArrayList<>();
 		List<Vector2D> delaunayPointSet = new ArrayList<>();
 		numOfMoves = 0;
@@ -225,6 +233,7 @@ public class DelaunayTriangulationDemo extends JFrame {
 				timerLabel.setText("Time Elapsed: " + sdf.format(System.currentTimeMillis() - begin));
 			});
 			timer.start();
+			movesLabel.setText("Moves moved: " + numOfMoves);
 			panel.repaint();
 			repaint();
 		}
@@ -234,6 +243,7 @@ public class DelaunayTriangulationDemo extends JFrame {
 		public void actionPerformed (ActionEvent event) {
 			try {
 				delaunayTriangulator.triangulate();
+				won = delaunayTriangulator.winCheck(delaunayTriangulator.getTriangles(), trueTriangulation.getTriangles());
 				timer.stop();
 				panel.repaint();
 				repaint();

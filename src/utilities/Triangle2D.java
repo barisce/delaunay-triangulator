@@ -28,6 +28,10 @@ public class Triangle2D {
 
 	}
 
+	boolean containsPoint (Vector2D point) {
+		return ((a.x == point.x-600 && a.y == point.y) || (b.x == point.x-600 && b.y == point.y) || (c.x == point.x-600 && c.y == point.y));
+	}
+
 	boolean isPointInCircumcircle (Vector2D point) {
 		double a11 = a.x - point.x;
 		double a21 = b.x - point.x;
