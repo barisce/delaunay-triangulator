@@ -122,7 +122,7 @@ public class DelaunayTriangulator {
 		Triangle2D first = triangleSoup.findOneTriangleSharing(edge);
 		Triangle2D second = triangleSoup.findNeighbour(first, edge);
 
-		if (first != null && second != null) {
+		if (second != null) {
 			flipped = true;
 			Vector2D firstNonEdgeVertex = first.getNonEdgeVertex(edge);
 			Vector2D secondNonEdgeVertex = second.getNonEdgeVertex(edge);
